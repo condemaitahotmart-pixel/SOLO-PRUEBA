@@ -52,7 +52,7 @@ Fuentes que cita el ebook: NIH (National Institute on Aging), ACOG, The Menopaus
 - **Intro de marca** (una vez por sesión), scroll suave (Lenis), animaciones con GSAP + ScrollTrigger, títulos que suben por máscara y botones magnéticos.
 - **Sin menú superior** (la dueña pidió quitarlo).
 - **Hero:** "Tu cuerpo cambió. / Tú también puedes entenderlo." + botón "QUIERO MI GUÍA" + línea "10 capítulos · 3 bonos · US$17.97 pago único" + **fila de tarjetas que se desplaza sola** (temas, bonos, plan de 14 días, 4 preguntas, precio).
-- **Orden de las secciones (versión resumida):** hero → manifiesto con zoom → 4 dolores en paneles horizontales → 10 capítulos desplegables → bonos que se desbloquean (línea de tiempo) → oferta con borde de luz y order bump → garantía (sello que gira) → ¿es para ti? → 5 preguntas frecuentes → cierre ("Tu historia todavía la estás escribiendo.") → pie con avisos y fuentes. En móvil hay una barra fija con el precio y el botón.
+- **Orden de las secciones (versión resumida):** hero → manifiesto con zoom → 4 dolores (cuadrícula 2×2 en escritorio, deslizables en móvil) → 10 capítulos desplegables → bonos que se desbloquean (línea de tiempo) → oferta con borde de luz y order bump → garantía (sello que gira) → ¿es para ti? → 5 preguntas frecuentes → cierre ("Tu historia todavía la estás escribiendo.") → pie con avisos y fuentes. En móvil hay una barra fija con el precio y el botón.
 
 **Lo que la dueña rechazó (no volver a proponer):** usar las portadas o páginas del ebook en la landing; la versión ilustrada clara al estilo "Claude Design" (mujer en arco); la forma 3D tipo "blob" (parecía un embrión); el fondo oscuro ciruela; una página demasiado larga; el menú superior.
 
@@ -73,6 +73,6 @@ Fuentes que cita el ebook: NIH (National Institute on Aging), ACOG, The Menopaus
 - Respeta "reducir movimiento" del sistema y sigue funcionando si no cargan GSAP o three.js (en ese caso queda un orbe en CSS).
 - Código fuente original separado en archivos (index.html, styles.css, main.js, bloom.js): repo `condemaitahotmart-pixel/SOLO-SKILLS`, carpeta `LANDING-MENOPAUSIA/`, rama `claude/intelligent-gates-u7nmrd`.
 
-## 7. Siguiente paso sugerido
+## 7. Estado
 
-Si hace falta acortarla más: convertir los 4 dolores en paneles horizontales (piden mucho scroll en escritorio) en una cuadrícula simple.
+Página ya resumida (unos 11.400 px de alto en escritorio). Lo único pendiente son los datos de la sección 5, que debe aportar la dueña.

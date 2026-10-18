@@ -167,24 +167,6 @@ window.addEventListener("DOMContentLoaded", () => {
     .to({}, { duration: 0.4 });
   ScrollTrigger.create({ trigger: ".manifesto", start: "top top", end: "+=90%", onUpdate: (s) => { window.__bloom.s = 0.7 * (1 + s.progress * 0.3); } });
 
-  // 3. Dolores: paneles que pasan en horizontal mientras bajas (escritorio)
-  ScrollTrigger.matchMedia({
-    "(min-width: 960px)": () => {
-      const track = $(".js-pains");
-      const dist = () => track.scrollWidth - window.innerWidth;
-      gsap.to(track, {
-        x: () => -dist(), ease: "none",
-        scrollTrigger: { trigger: ".pains__pin", start: "top top", end: () => `+=${dist()}`, pin: true, scrub: 1, invalidateOnRefresh: true },
-      });
-      $$(".panel__art i").forEach((icon) => {
-        gsap.fromTo(icon, { rotate: -12, scale: 0.9 }, {
-          rotate: 12, scale: 1.08, ease: "none",
-          scrollTrigger: { trigger: ".pains__pin", start: "top top", end: () => `+=${dist()}`, scrub: true },
-        });
-      });
-    },
-  });
-
   // 4. Riel de los bonos que se llena al avanzar
   gsap.fromTo(".js-unlock", { "--fill": 0 }, {
     "--fill": 1, ease: "none",

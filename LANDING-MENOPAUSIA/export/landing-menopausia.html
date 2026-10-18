@@ -447,14 +447,16 @@ h3 { font-size: 1.25rem; line-height: 1.3; font-weight: 700; }
 .panel__tool { display: inline-flex; gap: 10px; align-items: center; margin-top: 22px; padding: 10px 16px; border-radius: var(--pill); font-weight: 700; font-size: 0.95rem; background: rgb(255 255 255 / 0.55); }
 .panel--rose { --mesh: radial-gradient(40% 50% at 20% 20%, #e4f2ff, transparent), radial-gradient(50% 60% at 80% 30%, #9fd0ff, transparent), radial-gradient(60% 60% at 40% 90%, #f3e3c6, transparent), #d6e9fb; }
 .panel--sage { --mesh: radial-gradient(45% 55% at 15% 30%, #dfe8d6, transparent), radial-gradient(50% 60% at 85% 20%, #b7c8ae, transparent), radial-gradient(55% 55% at 60% 90%, #f1e6cf, transparent), #cfdcc6; }
-.panel--plum { --mesh: radial-gradient(45% 55% at 20% 20%, #3d86d6, transparent), radial-gradient(50% 60% at 85% 40%, #5a2340, transparent), radial-gradient(55% 55% at 50% 100%, #7ab8ef, transparent), #1d5aa6; color: #ffffff; --ink-art: #ffffff; }
+.panel--plum { --mesh: radial-gradient(45% 55% at 20% 20%, #3d86d6, transparent), radial-gradient(50% 60% at 85% 40%, #174f98, transparent), radial-gradient(55% 55% at 50% 100%, #7ab8ef, transparent), #1d5aa6; color: #ffffff; --ink-art: #ffffff; }
 .panel--petrol { --mesh: radial-gradient(45% 55% at 20% 25%, #2f7380, transparent), radial-gradient(50% 60% at 85% 30%, #163a41, transparent), radial-gradient(55% 55% at 50% 100%, #c9a96a, transparent), #1e4c55; color: #f8f1e6; --ink-art: #f8f1e6; }
 .panel--plum .panel__tool, .panel--petrol .panel__tool { background: rgb(255 255 255 / 0.12); }
+/* Escritorio: cuadrícula de 2x2 (en móvil se desliza de lado) */
 @media (min-width: 960px) {
-  .panel { padding: 56px; min-height: 560px; }
-  .has-gsap .pains { padding-block: 0; }
-  .has-gsap .pains__pin { min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; padding-block: 90px 50px; }
-  .has-gsap .pains__viewport { overflow: visible; scroll-snap-type: none; }
+  .pains__viewport { overflow: visible; scroll-snap-type: none; }
+  .pains__track { display: grid; grid-template-columns: 1fr 1fr; width: auto; max-width: var(--wrap); margin-inline: auto; padding: 0 32px; gap: 18px; }
+  .panel { width: auto; min-height: 340px; padding: 40px; }
+  .panel__quote { font-size: clamp(2rem, 2.8vw, 2.6rem); }
+  .panel__art i { font-size: 15rem; }
 }
 
 /* ---------- Índice editorial ---------- */
@@ -1602,24 +1604,6 @@ window.addEventListener("DOMContentLoaded", () => {
     .fromTo(".js-mf-b", { opacity: 0, y: 70, scale: 1.08, filter: "blur(10px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 }, "-=0.35")
     .to({}, { duration: 0.4 });
   ScrollTrigger.create({ trigger: ".manifesto", start: "top top", end: "+=90%", onUpdate: (s) => { window.__bloom.s = 0.7 * (1 + s.progress * 0.3); } });
-
-  // 3. Dolores: paneles que pasan en horizontal mientras bajas (escritorio)
-  ScrollTrigger.matchMedia({
-    "(min-width: 960px)": () => {
-      const track = $(".js-pains");
-      const dist = () => track.scrollWidth - window.innerWidth;
-      gsap.to(track, {
-        x: () => -dist(), ease: "none",
-        scrollTrigger: { trigger: ".pains__pin", start: "top top", end: () => `+=${dist()}`, pin: true, scrub: 1, invalidateOnRefresh: true },
-      });
-      $$(".panel__art i").forEach((icon) => {
-        gsap.fromTo(icon, { rotate: -12, scale: 0.9 }, {
-          rotate: 12, scale: 1.08, ease: "none",
-          scrollTrigger: { trigger: ".pains__pin", start: "top top", end: () => `+=${dist()}`, scrub: true },
-        });
-      });
-    },
-  });
 
   // 4. Riel de los bonos que se llena al avanzar
   gsap.fromTo(".js-unlock", { "--fill": 0 }, {

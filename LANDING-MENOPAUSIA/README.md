@@ -32,7 +32,7 @@ En `index.html`, pie de página: enlaza **Términos** y **Privacidad** y cambia 
 - **Estilo moderno**: tipografía Manrope con contraste de pesos, texto blanco, botones en píldora lima con flecha en círculo oscuro, tarjetas de vidrio.
 - **Fila de tarjetas al pie del hero** que se desplaza sola (temas, bonos, plan de 14 días con títulos reales del Bono 1, 4 preguntas, precio).
 - **Scroll suave** con inercia (Lenis) en escritorio.
-- Página resumida: hero, manifiesto con zoom, 4 dolores en paneles horizontales, 10 capítulos desplegables, bonos que se desbloquean, oferta con borde de luz animado, garantía, para quién es, 5 preguntas frecuentes y cierre. Las fuentes de referencia van en el pie de página.
+- Página resumida: hero, manifiesto con zoom, 4 dolores en cuadrícula (deslizables en móvil), 10 capítulos desplegables, bonos que se desbloquean, oferta con borde de luz animado, garantía, para quién es, 5 preguntas frecuentes y cierre. Las fuentes de referencia van en el pie de página.
 - Respeta `prefers-reduced-motion` (sin animaciones) y funciona aunque no carguen GSAP ni three.js.
 
 ## Lo que respeta (según tu brief)
