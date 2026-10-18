@@ -1,5 +1,5 @@
 // Escena 3D en tiempo real (three.js):
-// 1) Fondo "aurora": seda de luz ciruela, petróleo, rosa y dorado que fluye y reacciona al puntero.
+// 1) Fondo "aurora" pastel: seda de luz durazno, rosa, lila, menta y dorado que fluye y reacciona al puntero.
 // 2) Flor de loto que se abre al entrar, con pétalos iridiscentes que respiran, centro dorado que brilla
 //    y polen luminoso flotando. La flor cambia de lugar según la sección (BLOOM_SPOTS en main.js).
 // Si no hay WebGL, queda el orbe en CSS. Con "reducir movimiento" se dibuja una sola imagen quieta.
@@ -39,21 +39,25 @@ void main(){
   vec2 m = uMouse * 0.12;
   float r = fbm(p * 1.7 + 2.2 * q + vec2(1.7, 9.2) + t * 0.045 + m);
 
-  vec3 night  = vec3(0.10, 0.05, 0.08);
-  vec3 plum   = vec3(0.33, 0.11, 0.22);
-  vec3 petrol = vec3(0.09, 0.27, 0.31);
-  vec3 rose   = vec3(0.86, 0.48, 0.60);
-  vec3 gold   = vec3(0.92, 0.76, 0.48);
+  // Paleta pastel luminosa: crema, durazno, rosa, lila, menta y dorado
+  vec3 cream = vec3(0.995, 0.955, 0.925);
+  vec3 peach = vec3(1.00, 0.83, 0.74);
+  vec3 pink  = vec3(0.98, 0.72, 0.82);
+  vec3 lilac = vec3(0.85, 0.78, 0.97);
+  vec3 mint  = vec3(0.78, 0.93, 0.86);
+  vec3 gold  = vec3(1.00, 0.88, 0.62);
 
-  vec3 col = mix(night, plum, smoothstep(0.25, 0.85, r));
-  col = mix(col, petrol, smoothstep(0.45, 0.95, q.x) * 0.7);
-  col += rose * pow(smoothstep(0.5, 1.0, r), 2.0) * 0.7;
-  // hebras de seda que cruzan la luz
+  vec3 col = mix(cream, peach, smoothstep(0.3, 0.8, r));
+  col = mix(col, pink, smoothstep(0.42, 0.92, q.x) * 0.85);
+  col = mix(col, lilac, smoothstep(0.42, 0.9, q.y) * 0.9);
+  col = mix(col, mint, smoothstep(0.45, 0.9, 1.0 - r) * smoothstep(0.3, 0.8, q.y) * 0.9);
+  col += gold * pow(smoothstep(0.65, 1.0, r * (0.55 + q.x)), 2.0) * 0.18;
+  // hebras de seda brillantes
   float silk = 0.5 + 0.5 * sin((p.x * 1.6 + p.y * 0.9 + r * 3.2 - t * 0.08) * 6.2831);
-  col += mix(rose, gold, q.y) * pow(silk, 14.0) * 0.12 * smoothstep(0.3, 0.9, r);
-  col += gold * pow(smoothstep(0.7, 1.0, r * (0.6 + q.y)), 3.0) * 0.22;
-  // viñeta suave para que el texto respire
-  col *= 1.0 - 0.55 * smoothstep(0.2, 1.1, length(p * vec2(0.85, 1.0)));
+  col += vec3(1.0) * pow(silk, 12.0) * 0.16 * smoothstep(0.3, 0.9, r);
+  // bordes apenas más rosados para dar profundidad
+  col = mix(col, col * vec3(0.97, 0.9, 0.93), smoothstep(0.35, 1.2, length(p * vec2(0.85, 1.0))));
+  col = clamp(col, 0.0, 1.0);
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -100,7 +104,7 @@ void main(){
   float vein = pow(abs(sin(u * 3.14159 * 4.0)), 40.0) * (1.0 - v) * 0.12;
   col -= vein;
 
-  float diff = 0.55 + 0.45 * max(dot(N, L), 0.0);
+  float diff = 0.75 + 0.3 * max(dot(N, L), 0.0);
   col *= diff;
   float back = pow(max(dot(-N, L), 0.0), 2.0);     // luz que atraviesa el pétalo
   col += rose * back * 0.28;
@@ -149,8 +153,8 @@ void main(){
   float d = length(c);
   float a = smoothstep(0.5, 0.0, d);
   a = pow(a, 1.6);
-  vec3 col = mix(vec3(1.0, 0.85, 0.55), vec3(1.0, 0.7, 0.8), step(0.6, vSeed));
-  gl_FragColor = vec4(col, a * vAlpha);
+  vec3 col = mix(vec3(0.90, 0.66, 0.28), vec3(0.80, 0.33, 0.52), step(0.6, vSeed));
+  gl_FragColor = vec4(col, a * vAlpha * 0.85);
 }`;
 
 // ---------- Geometría de pétalo ----------
@@ -280,7 +284,7 @@ function start() {
   glow.scale.set(1.1, 1.1, 1);
   glow.position.y = 0.2;
   spin.add(glow);
-  const aura = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xd9779a, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.22 }));
+  const aura = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xf4a3c0, transparent: true, depthWrite: false, opacity: 0.35 }));
   aura.scale.set(5.2, 5.2, 1);
   aura.renderOrder = -1;
   flower.add(aura);
@@ -301,7 +305,7 @@ function start() {
   pGeo.setAttribute("aSeed", new THREE.BufferAttribute(pSeed, 1));
   pGeo.setAttribute("aSize", new THREE.BufferAttribute(pSize, 1));
   const pollenMat = new THREE.ShaderMaterial({
-    vertexShader: pollenVert, fragmentShader: pollenFrag, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: pollenVert, fragmentShader: pollenFrag, transparent: true, depthWrite: false, blending: THREE.NormalBlending,
     uniforms: { uTime: { value: 0 }, uPR: { value: PR } },
   });
   flower.add(new THREE.Points(pGeo, pollenMat));
@@ -340,7 +344,9 @@ function start() {
     const k = 1 - Math.exp(-dt * 2.8), km = 1 - Math.exp(-dt * 3.2);
     state.x += (target.x - state.x) * k;
     state.y += (target.y - state.y) * k;
-    state.s += (target.s - state.s) * k;
+    // En las secciones de contenido la flor se recoge y queda solo la aurora
+    const hide = document.body.dataset.theme === "day";
+    state.s += ((hide ? 0 : target.s) - state.s) * k;
     state.mx += (pointer.x - state.mx) * km;
     state.my += (pointer.y - state.my) * km;
     // La flor se abre cuando termina la intro
@@ -375,14 +381,13 @@ function start() {
     renderer.setRenderTarget(null);
     renderer.clear();
     renderer.render(blitScene, orthoCam);
-    renderer.render(world, camera);
+    if (state.s > 0.01) renderer.render(world, camera);
   };
 
   let running = true;
   const loop = () => {
     if (!running) return;
-    // En secciones de "día" la escena está oculta: no dibujamos para ahorrar batería
-    if (document.body.dataset.theme !== "day") frame();
+    frame();
     requestAnimationFrame(loop);
   };
   document.addEventListener("visibilitychange", () => { running = !document.hidden; if (running && !reduceMotion) { clock.getDelta(); loop(); } });
