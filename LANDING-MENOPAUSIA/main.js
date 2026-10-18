@@ -103,11 +103,10 @@ const updateSticky = () => {
 window.__bloom = { x: 0, y: -0.1, s: 1 };
 const BLOOM_SPOTS = {
   hero: { x: 0.55, y: 0.22, s: 0.7, mx: 0.3, my: 0.74, ms: 0.78 },
-  whispers: { x: 0.78, y: -0.72, s: 0.45, mx: 0.55, my: -0.78, ms: 0.5 },
   manifesto: { x: 0, y: -0.82, s: 0.7, mx: 0, my: -0.8, ms: 0.7 },
   offer: { x: 0.95, y: -0.8, s: 0.55, mx: 0.62, my: 0.98, ms: 0.42 },
   guarantee: { x: -0.72, y: -0.62, s: 0.45, mx: 0, my: -0.9, ms: 0 },
-  final: { x: 0, y: 1.05, s: 0.58, mx: 0, my: 1.18, ms: 0.6 },
+  final: { x: 0, y: 1.32, s: 0.55, mx: 0, my: 1.18, ms: 0.6 },
 };
 const setBloom = (key) => {
   const spot = BLOOM_SPOTS[key];
@@ -161,12 +160,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 2. Manifiesto: la primera frase se aleja y aparece la segunda (el giro de la idea)
   gsap.timeline({
-    scrollTrigger: { trigger: ".manifesto", start: "top top", end: "+=140%", pin: ".manifesto__pin", scrub: 1 },
+    scrollTrigger: { trigger: ".manifesto", start: "top top", end: "+=90%", pin: ".manifesto__pin", scrub: 1 },
   })
     .to(".js-mf-a", { scale: 0.86, opacity: 0, filter: "blur(10px)", ease: "power1.in", duration: 1 })
     .fromTo(".js-mf-b", { opacity: 0, y: 70, scale: 1.08, filter: "blur(10px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 }, "-=0.35")
     .to({}, { duration: 0.4 });
-  ScrollTrigger.create({ trigger: ".manifesto", start: "top top", end: "+=140%", onUpdate: (s) => { window.__bloom.s = 0.7 * (1 + s.progress * 0.3); } });
+  ScrollTrigger.create({ trigger: ".manifesto", start: "top top", end: "+=90%", onUpdate: (s) => { window.__bloom.s = 0.7 * (1 + s.progress * 0.3); } });
 
   // 3. Dolores: paneles que pasan en horizontal mientras bajas (escritorio)
   ScrollTrigger.matchMedia({

@@ -32,15 +32,14 @@ En `index.html`, pie de página: enlaza **Términos** y **Privacidad** y cambia 
 - **Estilo moderno**: tipografía Manrope con contraste de pesos, texto blanco, botones en píldora lima con flecha en círculo oscuro, tarjetas de vidrio.
 - **Fila de tarjetas al pie del hero** que se desplaza sola (temas, bonos, plan de 14 días con títulos reales del Bono 1, 4 preguntas, precio).
 - **Scroll suave** con inercia (Lenis) en escritorio.
-- Muro de frases que muchas mujeres se dicen (tomadas del ebook, sin atribuir a nadie).
-- Manifiesto con zoom fijo, dolores en paneles horizontales, índice de capítulos desplegable, 4 preguntas apiladas, bonos que se desbloquean, precio con borde de luz animado, botones magnéticos.
+- Página resumida: hero, manifiesto con zoom, 4 dolores en paneles horizontales, 10 capítulos desplegables, bonos que se desbloquean, oferta con borde de luz animado, garantía, para quién es, 5 preguntas frecuentes y cierre. Las fuentes de referencia van en el pie de página.
 - Respeta `prefers-reduced-motion` (sin animaciones) y funciona aunque no carguen GSAP ni three.js.
 
 ## Lo que respeta (según tu brief)
 
 - Sin precio tachado, sin cuenta regresiva, sin testimonios ni cifras inventadas.
 - Sin promesas médicas: comprender, observar, actuar, cuidarse y saber cuándo consultar.
-- Solo bajo **Nexo Editorial**; las fuentes (NIH, ACOG, The Menopause Society, HHS) se citan aclarando que no respaldan la guía.
+- Solo bajo **Nexo Editorial**; las fuentes (NIH, ACOG, The Menopause Society, HHS) se citan en el pie aclarando que no respaldan la guía.
 - Aviso médico y aviso de "no afiliado a Meta" en el pie.
 - No usa imágenes del ebook. `assets/og.jpg` (vista previa al compartir el link) es una captura del hero.
 
