@@ -28,9 +28,10 @@ En `index.html`, pie de página: enlaza **Términos** y **Privacidad** y cambia 
 
 - **Intro de marca** al entrar (solo la primera vez por sesión).
 - **Flor de loto 3D en tiempo real** (three.js + shaders propios): se abre al entrar, sus pétalos iridiscentes respiran, el centro dorado brilla y hay polen luminoso flotando. Sigue al puntero y cambia de lugar en cada sección (posiciones en `BLOOM_SPOTS`, `main.js`). Sin WebGL se ve un orbe en CSS.
-- **Fondo de aurora pastel animada** en toda la página: seda de luz durazno, rosa, lila, menta y dorado que fluye y reacciona al mouse. La flor aparece en las secciones protagonistas y se recoge en las de contenido.
+- **Fondo de cielo animado** en toda la página: azul con nubes de luz blancas y toques lila y turquesa, que fluye y reacciona al mouse. La flor aparece en las secciones protagonistas y se recoge en las de contenido.
+- **Estilo moderno**: tipografía Manrope con contraste de pesos, texto blanco, botones en píldora lima con flecha en círculo oscuro, tarjetas de vidrio.
+- **Fila de tarjetas al pie del hero** que se desplaza sola (temas, bonos, plan de 14 días con títulos reales del Bono 1, 4 preguntas, precio).
 - **Scroll suave** con inercia (Lenis) en escritorio.
-- Página clara de principio a fin, con textos en ciruela oscuro para buena lectura.
 - Muro de frases que muchas mujeres se dicen (tomadas del ebook, sin atribuir a nadie).
 - Manifiesto con zoom fijo, dolores en paneles horizontales, índice de capítulos desplegable, 4 preguntas apiladas, bonos que se desbloquean, precio con borde de luz animado, botones magnéticos.
 - Respeta `prefers-reduced-motion` (sin animaciones) y funciona aunque no carguen GSAP ni three.js.

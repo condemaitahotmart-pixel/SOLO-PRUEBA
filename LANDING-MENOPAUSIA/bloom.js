@@ -1,5 +1,5 @@
 // Escena 3D en tiempo real (three.js):
-// 1) Fondo "aurora" pastel: seda de luz durazno, rosa, lila, menta y dorado que fluye y reacciona al puntero.
+// 1) Fondo "cielo": azul con nubes de luz blancas, toques lila y turquesa; fluye y reacciona al puntero.
 // 2) Flor de loto que se abre al entrar, con pétalos iridiscentes que respiran, centro dorado que brilla
 //    y polen luminoso flotando. La flor cambia de lugar según la sección (BLOOM_SPOTS en main.js).
 // Si no hay WebGL, queda el orbe en CSS. Con "reducir movimiento" se dibuja una sola imagen quieta.
@@ -39,24 +39,23 @@ void main(){
   vec2 m = uMouse * 0.12;
   float r = fbm(p * 1.7 + 2.2 * q + vec2(1.7, 9.2) + t * 0.045 + m);
 
-  // Paleta pastel luminosa: crema, durazno, rosa, lila, menta y dorado
-  vec3 cream = vec3(0.995, 0.955, 0.925);
-  vec3 peach = vec3(1.00, 0.83, 0.74);
-  vec3 pink  = vec3(0.98, 0.72, 0.82);
-  vec3 lilac = vec3(0.85, 0.78, 0.97);
-  vec3 mint  = vec3(0.78, 0.93, 0.86);
-  vec3 gold  = vec3(1.00, 0.88, 0.62);
+  // Cielo: azul profundo arriba, celeste abajo, nubes de luz blancas y un toque lila y turquesa
+  float h = uv.y;
+  vec3 deep  = vec3(0.13, 0.43, 0.82);
+  vec3 sky   = vec3(0.33, 0.62, 0.92);
+  vec3 light = vec3(0.47, 0.71, 0.95);
+  vec3 lilac = vec3(0.68, 0.70, 0.98);
+  vec3 teal  = vec3(0.35, 0.78, 0.86);
+  vec3 cloud = vec3(1.0);
 
-  vec3 col = mix(cream, peach, smoothstep(0.3, 0.8, r));
-  col = mix(col, pink, smoothstep(0.42, 0.92, q.x) * 0.85);
-  col = mix(col, lilac, smoothstep(0.42, 0.9, q.y) * 0.9);
-  col = mix(col, mint, smoothstep(0.45, 0.9, 1.0 - r) * smoothstep(0.3, 0.8, q.y) * 0.9);
-  col += gold * pow(smoothstep(0.65, 1.0, r * (0.55 + q.x)), 2.0) * 0.18;
-  // hebras de seda brillantes
+  vec3 col = mix(light, deep, smoothstep(0.0, 1.0, h * 0.9 + (r - 0.5) * 0.5));
+  col = mix(col, sky, smoothstep(0.35, 0.8, q.x) * 0.5);
+  col = mix(col, lilac, smoothstep(0.55, 0.95, q.y) * 0.35);
+  col = mix(col, teal, smoothstep(0.6, 0.95, 1.0 - q.x) * (1.0 - h) * 0.35);
+  float c = smoothstep(0.55, 0.95, r) * (0.55 + 0.45 * q.y);
+  col = mix(col, cloud, c * 0.38);
   float silk = 0.5 + 0.5 * sin((p.x * 1.6 + p.y * 0.9 + r * 3.2 - t * 0.08) * 6.2831);
-  col += vec3(1.0) * pow(silk, 12.0) * 0.16 * smoothstep(0.3, 0.9, r);
-  // bordes apenas más rosados para dar profundidad
-  col = mix(col, col * vec3(0.97, 0.9, 0.93), smoothstep(0.35, 1.2, length(p * vec2(0.85, 1.0))));
+  col += vec3(1.0) * pow(silk, 14.0) * 0.1 * smoothstep(0.3, 0.9, r);
   col = clamp(col, 0.0, 1.0);
   gl_FragColor = vec4(col, 1.0);
 }`;
@@ -153,8 +152,8 @@ void main(){
   float d = length(c);
   float a = smoothstep(0.5, 0.0, d);
   a = pow(a, 1.6);
-  vec3 col = mix(vec3(0.90, 0.66, 0.28), vec3(0.80, 0.33, 0.52), step(0.6, vSeed));
-  gl_FragColor = vec4(col, a * vAlpha * 0.85);
+  vec3 col = mix(vec3(1.0, 1.0, 1.0), vec3(1.0, 0.78, 0.86), step(0.6, vSeed));
+  gl_FragColor = vec4(col, a * vAlpha * 0.9);
 }`;
 
 // ---------- Geometría de pétalo ----------

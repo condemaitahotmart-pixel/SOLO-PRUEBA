@@ -30,6 +30,15 @@ if (CONFIG.guaranteeDays) {
   $$(".js-guarantee-section, .js-guarantee-row, .js-guarantee-faq").forEach((el) => (el.hidden = true));
 }
 
+// ---------- Fila de tarjetas del hero: copia para el bucle continuo ----------
+const stripSet = $(".strip__set");
+if (stripSet) {
+  const copy = stripSet.cloneNode(true);
+  copy.setAttribute("aria-hidden", "true");
+  stripSet.after(copy);
+  $$(".js-price", copy).forEach((el) => (el.textContent = CONFIG.price));
+}
+
 // ---------- Testimonios reales ----------
 if (CONFIG.testimonials.length) {
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -93,12 +102,12 @@ const updateSticky = () => {
 // x/y en unidades de pantalla (-1 a 1), s = escala. En móvil se acerca al centro.
 window.__bloom = { x: 0, y: -0.1, s: 1 };
 const BLOOM_SPOTS = {
-  hero: { x: 0.52, y: 0.02, s: 0.74, mx: 0.3, my: 0.72, ms: 0.8 },
+  hero: { x: 0.55, y: 0.22, s: 0.7, mx: 0.3, my: 0.74, ms: 0.78 },
   whispers: { x: 0.78, y: -0.72, s: 0.45, mx: 0.55, my: -0.78, ms: 0.5 },
   manifesto: { x: 0, y: -0.82, s: 0.7, mx: 0, my: -0.8, ms: 0.7 },
   offer: { x: 0.95, y: -0.8, s: 0.55, mx: 0.62, my: 0.98, ms: 0.42 },
-  guarantee: { x: -0.72, y: -0.62, s: 0.45, mx: -0.55, my: -0.85, ms: 0.45 },
-  final: { x: 0, y: 1.05, s: 0.58, mx: 0, my: 1.0, ms: 0.6 },
+  guarantee: { x: -0.72, y: -0.62, s: 0.45, mx: 0, my: -0.9, ms: 0 },
+  final: { x: 0, y: 1.05, s: 0.58, mx: 0, my: 1.18, ms: 0.6 },
 };
 const setBloom = (key) => {
   const spot = BLOOM_SPOTS[key];
