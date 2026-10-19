@@ -1,0 +1,17 @@
+{
+  "name": "whatsapp-facturas",
+  "version": "1.0.0",
+  "description": "Descarga facturas recibidas por WhatsApp y las ordena en carpetas locales",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "historial": "node src/index.js --historial",
+    "chats": "node src/index.js --listar-chats",
+    "test": "node src/util.test.js"
+  },
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.26.0"
+  },
+  "engines": { "node": ">=18" }
+}

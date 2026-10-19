@@ -1,0 +1,15 @@
+{
+  "carpetaDestino": "C:\\Facturas",
+  "estructura": "{proveedor}/{anio}/{mes}",
+  "tiposPermitidos": ["application/pdf", "text/xml", "application/xml", "image/jpeg", "image/png"],
+  "imagenesSoloConPalabras": true,
+  "palabrasFactura": ["factura", "boleta", "invoice", "recibo", "comprobante", "nota de credito", "nota de crédito", "guia", "guía"],
+  "soloChats": [],
+  "ignorarChats": [],
+  "grupoUsaRemitente": false,
+  "alias": {
+    "Ejemplo Chat Proveedor": "Proveedor Ejemplo"
+  },
+  "diasHistorialPorDefecto": 30,
+  "mensajesPorChatHistorial": 300
+}
